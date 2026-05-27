@@ -28,7 +28,6 @@ export default function CheckoutPage() {
 
   const sub = subtotal()
   const shipping = sub >= STORE_CONFIG.shipping.freeThreshold ? 0 : STORE_CONFIG.shipping.flatRate
-  const total = sub + shipping
 
   if (items.length === 0) {
     return (
