@@ -1,3 +1,4 @@
+import type { ProductVariant } from '../types/index';
 import type { Product } from '@/types'
 
 // ─────────────────────────────────────────────────────────────────────────────
