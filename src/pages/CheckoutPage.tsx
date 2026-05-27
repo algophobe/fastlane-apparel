@@ -24,7 +24,12 @@ export default function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(null)
   const [proofFile, setProofFile] = useState<File | null>(null)
   const [orderId] = useState(() => generateOrderId())
-  const [submitting, setSubmitting] = useState(false)
+ const [submitting, setSubmitting] = useState(false)
+
+const total = items.reduce(
+  (sum, item) => sum + item.price * item.quantity,
+  0
+)
 
   const sub = subtotal()
   const shipping = sub >= STORE_CONFIG.shipping.freeThreshold ? 0 : STORE_CONFIG.shipping.flatRate
