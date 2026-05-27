@@ -7,7 +7,6 @@ export default function StorePage() {
   const [activeType, setActiveType] = useState('all')
   const types = getProductTypes()
   const products = getProductsByType(activeType)
-  const featuredCount = PRODUCTS.filter(p => p.featured).length
 
   const typeLabels: Record<string, string> = {
     all: 'All',
