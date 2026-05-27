@@ -25,6 +25,12 @@ const STATUS_COLORS: Record<OrderStatus, string> = {
   cancelled: 'text-red-400 bg-red-400/10',
 }
 
+const password = prompt('Enter admin password')
+
+if (password !== 'ayrtonsenna12') {
+  window.location.href = '/'
+}
+
 export default function AdminPage() {
   const [tab, setTab] = useState<AdminTab>('orders')
   const { orders, updateOrder } = useOrdersStore()
