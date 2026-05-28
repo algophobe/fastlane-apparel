@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import type { Product } from '@/types'
-import { getDisplayPrice } from '@/data/products'
 
 interface Props {
   product: Product
@@ -9,7 +8,8 @@ interface Props {
 }
 
 export default function ProductCard({ product, index = 0 }: Props) {
-  const displayPrice = getDisplayPrice(product)
+  const displayPrice =
+  product.salePrice || product.basePrice
   const hasSale = !!product.salePrice
 
   return (
