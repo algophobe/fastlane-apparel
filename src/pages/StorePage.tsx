@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-
-import { fetchProducts } from '@/lib/products'
+import { getProducts } from '@/lib/localProducts'
 
 import type { Product } from '@/types'
 
@@ -12,9 +11,9 @@ export default function StorePage() {
 
   const [products, setProducts] = useState<Product[]>([])
 
-  useEffect(() => {
-    fetchProducts().then(setProducts)
-  }, [])
+useEffect(() => {
+  setProducts(getProducts())
+}, [])
 
   const types = [
     'all',
