@@ -4,6 +4,8 @@ import { Package, ShoppingBag, DollarSign, AlertTriangle, Check, X, Eye, Chevron
 import { useOrdersStore } from '@/hooks/useStore'
 import { PRODUCTS } from '@/data/products'
 import type { Order, OrderStatus } from '@/types'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 type AdminTab = 'orders' | 'products'
 
@@ -25,10 +27,10 @@ const STATUS_COLORS: Record<OrderStatus, string> = {
   cancelled: 'text-red-400 bg-red-400/10',
 }
 
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 export default function AdminPage() {
+  const [tab, setTab] = useState<AdminTab>('orders')
+  const { orders, updateOrder } = useOrdersStore()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -39,16 +41,6 @@ export default function AdminPage() {
     }
   }, [])
 
-  return (
-    <div>
-      {/* your admin page content */}
-    </div>
-  )
-}
-
-export default function AdminPage() {
-  const [tab, setTab] = useState<AdminTab>('orders')
-  const { orders, updateOrder } = useOrdersStore()
 
   const stats = {
     totalOrders: orders.length,
