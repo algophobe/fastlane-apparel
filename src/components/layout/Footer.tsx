@@ -30,12 +30,12 @@ export default function Footer() {
   ].map((logo, i) => (
     <div
       key={i}
-      className="bg-white rounded-md px-3 py-2 hover:scale-105 transition-all duration-200"
+      className="bg-white rounded-md w-16 h-10 flex items-center justify-center hover:scale-105 transition-all duration-200 overflow-hidden"
     >
       <img
         src={logo}
         alt=""
-        className="h-5 w-auto object-contain"
+        className="h-10 w-16 object-contain"
       />
     </div>
   ))}
