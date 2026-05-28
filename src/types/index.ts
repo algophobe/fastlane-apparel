@@ -1,9 +1,14 @@
 // ─── PRODUCT TYPES ───────────────────────────────────────────────────────────
 
-export type ProductType = 'apparel' | 'poster' | 'phone-case' | 'accessory' | 'sticker' | string
+export type ProductType =
+  | 'hoodies'
+  | 't-shirts'
+  | 'posters'
+  | 'cases'
+  | string
 
 export interface VariantOption {
-  label: string  // "Size", "Color", "Finish", "Device"
+  name: string
   values: string[]
 }
 
