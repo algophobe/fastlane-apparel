@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 import type { Product } from '@/types'
 
 const SHEET_ID = '10PJCI4QTy6OpH9pq1snAGANMno9BxC5s9r3HEsqWrOw'
@@ -25,7 +27,7 @@ export async function fetchProducts(): Promise<Product[]> {
 
       title: row[0] || 'Untitled',
 
-      type: row[2] || 'apparel',
+      type: row[2] || 'hoodies',
 
       description: row[4] || '',
 
