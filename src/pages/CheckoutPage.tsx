@@ -115,7 +115,7 @@ export default function CheckoutPage() {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }
-await fetch('YOUR_DISCORD_WEBHOOK_URL', {
+await fetch('https://discord.com/api/webhooks/1509346199855955988/LmdG92xT8yZlzPnvP5NutSA2vI9koI6NivhwshuJtgjwni2FUbmzJv6ECC3VK_9wUxmb', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
