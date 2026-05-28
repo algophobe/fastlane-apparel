@@ -49,7 +49,10 @@ export async function fetchProducts(): Promise<Product[]> {
 
     type: row[1] || 'hoodies',
 
-    images: [row[2]],
+    images:
+  row[2]
+    ?.split(',')
+    .map((img) => img.trim()) || [],
 
     description: row[3] || '',
 
