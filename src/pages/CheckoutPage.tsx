@@ -58,19 +58,96 @@ const total = items.reduce(
   }
 
   const handleProofSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!paymentMethod) return
-    setSubmitting(true)
+  e.preventDefault()
 
-    // Read screenshot as base64 for localStorage storage
-    let screenshotData: string | undefined
-    if (proofFile) {
-      screenshotData = await new Promise<string>(res => {
-        const reader = new FileReader()
-        reader.onload = () => res(reader.result as string)
-        reader.readAsDataURL(proofFile)
-      })
-    }
+  if (!paymentMethod) return
+
+  setSubmitting(true)
+
+  let screenshotData: string | undefined
+
+  if (proofFile) {
+    screenshotData = await new Promise<string>(res => {
+      const reader = new FileReader()
+
+      reader.onload = () => res(reader.result as string)
+
+      reader.readAsDataURL(proofFile)
+    })
+  }
+
+  const order: Order = {
+    id: orderId,
+    items,
+    customer,
+    paymentMethod,
+    subtotal: sub,
+    shipping,
+    total,
+    status: proofFile ? 'pending_verification' : 'pending_payment',
+    paymentScreenshot: screenshotData,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  }
+
+  addOrder(order)
+
+  try {
+    await fetch(import.meta.env.VITE_DISCORD_WEBHOOK, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        embeds: [
+          {
+            title: `🛒 New Order - ${order.id}`,
+            color: 16711680,
+            fields: [
+              {
+                name: 'Customer',
+                value: `${customer.firstName} ${customer.lastName}`,
+              },
+              {
+                name: 'Email',
+                value: customer.email,
+              },
+              {
+                name: 'Address',
+                value: `${customer.address}, ${customer.city}, ${customer.state} ${customer.zip}`,
+              },
+              {
+                name: 'Payment Method',
+                value: paymentMethod,
+              },
+              {
+                name: 'Total',
+                value: `$${total.toFixed(2)}`,
+              },
+              {
+                name: 'Items',
+                value: items
+                  .map(
+                    item =>
+                      `${item.title} x${item.quantity}`
+                  )
+                  .join('\n'),
+              },
+            ],
+          },
+        ],
+      }),
+    })
+  } catch (err) {
+    console.error('Discord webhook failed', err)
+  }
+
+  clearCart()
+
+  setSubmitting(false)
+
+  navigate(`/order/${orderId}`)
+}
 
     const order: Order = {
       id: orderId,
