@@ -356,12 +356,8 @@ function InfoStep({
   onSubmit,
 }: {
   customer: CustomerInfo
-
   onChange: (c: CustomerInfo) => void
-
-  onSubmit: (
-    e: React.FormEvent
-  ) => void
+  onSubmit: (e: React.FormEvent) => void
 }) {
   const set =
     (k: keyof CustomerInfo) =>
@@ -384,6 +380,7 @@ function InfoStep({
       onSubmit={onSubmit}
       className="space-y-6"
     >
+      {/* CONTACT */}
       <div>
         <h2 className="font-body font-semibold text-white text-lg mb-4">
           Contact
@@ -391,36 +388,32 @@ function InfoStep({
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="label">
-              First Name
-            </label>
+            <label className="label">First Name</label>
 
             <input
               className="input"
               required
               value={customer.firstName}
               onChange={set('firstName')}
+              placeholder="Jordan"
             />
           </div>
 
           <div>
-            <label className="label">
-              Last Name
-            </label>
+            <label className="label">Last Name</label>
 
             <input
               className="input"
               required
               value={customer.lastName}
               onChange={set('lastName')}
+              placeholder="Smith"
             />
           </div>
         </div>
 
         <div className="mt-3">
-          <label className="label">
-            Email
-          </label>
+          <label className="label">Email</label>
 
           <input
             className="input"
@@ -428,20 +421,117 @@ function InfoStep({
             required
             value={customer.email}
             onChange={set('email')}
+            placeholder="jordan@example.com"
           />
         </div>
 
         <div className="mt-3">
-          <label className="label">
-            Phone
-          </label>
+          <label className="label">Phone</label>
 
           <input
             className="input"
             type="tel"
             value={customer.phone ?? ''}
             onChange={set('phone')}
+            placeholder="+1 (555) 000-0000"
           />
+        </div>
+      </div>
+
+      {/* SHIPPING */}
+      <div>
+        <h2 className="font-body font-semibold text-white text-lg mb-4">
+          Shipping Address
+        </h2>
+
+        <div className="space-y-3">
+          <div>
+            <label className="label">Address</label>
+
+            <input
+              className="input"
+              required
+              value={customer.address}
+              onChange={set('address')}
+              placeholder="123 Main St"
+            />
+          </div>
+
+          <div>
+            <label className="label">Apartment / Suite</label>
+
+            <input
+              className="input"
+              value={customer.address2 ?? ''}
+              onChange={set('address2')}
+              placeholder="Apt 4B"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="label">City</label>
+
+              <input
+                className="input"
+                required
+                value={customer.city}
+                onChange={set('city')}
+                placeholder="Los Angeles"
+              />
+            </div>
+
+            <div>
+              <label className="label">State</label>
+
+              <input
+                className="input"
+                required
+                value={customer.state}
+                onChange={set('state')}
+                placeholder="CA"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="label">ZIP</label>
+
+              <input
+                className="input"
+                required
+                value={customer.zip}
+                onChange={set('zip')}
+                placeholder="90001"
+              />
+            </div>
+
+            <div>
+              <label className="label">Country</label>
+
+              <select
+                className="input"
+                value={customer.country}
+                onChange={set('country')}
+              >
+                <option value="US">United States</option>
+                <option value="CA">Canada</option>
+                <option value="GB">United Kingdom</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="label">Order Notes</label>
+
+            <textarea
+              className="input resize-none h-20"
+              value={customer.orderNotes ?? ''}
+              onChange={set('orderNotes')}
+              placeholder="Any special requests..."
+            />
+          </div>
         </div>
       </div>
 
@@ -450,13 +540,11 @@ function InfoStep({
         className="btn-primary w-full flex items-center justify-center gap-2"
       >
         Continue to Payment
-
         <ArrowRight size={16} />
       </button>
     </motion.form>
   )
 }
-
 /* PAYMENT STEP */
 
 function PaymentStep({
