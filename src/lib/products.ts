@@ -47,7 +47,7 @@ export async function fetchProducts(): Promise<Product[]> {
 
     title: row[0] || 'Untitled',
 
-    type: row[1] || 'hoodies',
+    type: row[1]?.trim().toLowerCase() || 'hoodies',
 
     images:
   row[2]
