@@ -6,7 +6,7 @@ const SHEET_ID = '10PJCI4QTy6OpH9pq1snAGANMno9BxC5s9r3HEsqWrOw'
 
 const API_KEY = import.meta.env.VITE_GOOGLE_SHEETS_API_KEY
 
-const RANGE = 'Sheet1!A2:F'
+const RANGE = 'Sheet1!A2:H'
 
 export async function fetchProducts(): Promise<Product[]> {
   try {
@@ -19,39 +19,69 @@ export async function fetchProducts(): Promise<Product[]> {
 
     const rows = data.values || []
 
-    return rows.map((row: string[], index: number) => ({
-      id:
-        row[0]
-          ?.toLowerCase()
-          .replace(/\s+/g, '-') + '-' + index,
+    return rows.map((row: string[], index: number) => {
+  const optionName = row[4] || 'Option'
 
-      title: row[0] || 'Untitled',
+  const optionValues =
+    row[5]
+      ?.split(',')
+      .map((v) => v.trim()) || []
 
-      type: row[2] || 'hoodies',
+  const basePrice = Number(row[6]) || 0
 
-      description: row[4] || '',
+  const overrides: Record<string, number> = {}
 
-      images: [row[3]],
+  if (row[7]) {
+    row[7].split(',').forEach((pair) => {
+      const [option, price] = pair.split(':')
 
-      basePrice: Number(row[1]) || 0,
+      overrides[option.trim()] = Number(price)
+    })
+  }
 
-      tags: [],
+  return {
+    id:
+      row[0]
+        ?.toLowerCase()
+        .replace(/\s+/g, '-') + '-' + index,
 
-      featured: row[5] === 'true',
+    title: row[0] || 'Untitled',
 
-      variantOptions: [],
+    type: row[1] || 'hoodies',
 
-      variants: [
-        {
-          id: `variant-${index}`,
-          options: {},
-          price: Number(row[1]) || 0,
-          inventory: 999,
-        },
-      ],
+    images: [row[2]],
 
-      createdAt: new Date().toISOString(),
-    }))
+    description: row[3] || '',
+
+    basePrice,
+
+    tags: [],
+
+    featured: false,
+
+    variantOptions: [
+      {
+        name: optionName,
+        values: optionValues,
+      },
+    ],
+
+    variants: optionValues.map((value) => ({
+      id: `${index}-${value}`,
+
+      options: {
+        [optionName]: value,
+      },
+
+      price:
+        overrides[value] || basePrice,
+
+      inventory: 999,
+    })),
+
+    createdAt: new Date().toISOString(),
+  }
+})
   } catch (err) {
     console.error('Failed to fetch products:', err)
     return []
