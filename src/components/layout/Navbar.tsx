@@ -28,9 +28,13 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="font-display text-2xl tracking-widest text-white hover:text-[var(--brand-red)] transition-colors">
-            FASTLANE
-          </Link>
+          <Link to="/">
+  <img
+    src="/logo.svg"
+    alt="Fastlane"
+    className="h-8 w-auto"
+  />
+</Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
