@@ -36,8 +36,9 @@ export default function StorePage() {
     activeType === 'all'
       ? products
       : products.filter(
-          (product) => product.type === activeType
-        )
+    (product) =>
+      product.type?.trim().toLowerCase() === activeType
+  )
 
   return (
     <div>
