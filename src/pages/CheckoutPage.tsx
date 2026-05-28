@@ -115,7 +115,53 @@ export default function CheckoutPage() {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }
-
+await fetch('YOUR_DISCORD_WEBHOOK_URL', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    embeds: [
+      {
+        title: '🛒 New Order',
+        color: 0xffffff,
+        fields: [
+          {
+            name: 'Order ID',
+            value: orderId,
+            inline: true,
+          },
+          {
+            name: 'Customer',
+            value: `${customer.firstName} ${customer.lastName}`,
+            inline: true,
+          },
+          {
+            name: 'Email',
+            value: customer.email,
+            inline: false,
+          },
+          {
+            name: 'Payment Method',
+            value: paymentMethod,
+            inline: true,
+          },
+          {
+            name: 'Total',
+            value: `$${total.toFixed(2)}`,
+            inline: true,
+          },
+          {
+            name: 'Shipping Address',
+            value: `${customer.address}, ${customer.city}, ${customer.state} ${customer.zip}`,
+            inline: false,
+          },
+        ],
+        timestamp: new Date().toISOString(),
+      },
+    ],
+  }),
+})
       addOrder(order)
 
       clearCart()
