@@ -6,39 +6,38 @@
 export const STORE_CONFIG = {
   name: 'Fastlane Apparel',
   tagline: 'Built for the fast lane.',
-  email: 'orders@fastlaneapparel.com',
+  email: 'support.fastlaneapparel@gmail.com',
 
   // ── PAYMENT HANDLES ─────────────────────────────────────────────────────
   payments: {
     cashapp: {
-      handle: '$FastlaneApparel',
+      handle: '$fastlanepayment',
       displayName: 'Cash App',
       color: '#00D632',
-      instructions: 'Send the exact total to $FastlaneApparel and include your order ID in the note.',
+      instructions: 'Send the exact total to $fastlanepayment and include your order ID in the note.',
     },
     venmo: {
-      handle: '@FastlaneApparel',
+      handle: '@fastlanepayment',
       displayName: 'Venmo',
       color: '#3D95CE',
-      instructions: 'Send the exact total to @FastlaneApparel. Add your order ID in the "What\'s it for?" field.',
+      instructions: 'Send the exact total to @fastlanepayment. Add your order ID in the "What\'s it for?" field.',
     },
     zelle: {
-      handle: 'payments@fastlaneapparel.com',
+      handle: '2015157846',
       displayName: 'Zelle',
       color: '#6D1ED4',
-      instructions: 'Send to payments@fastlaneapparel.com and text us your order ID after paying.',
+      instructions: 'Send to 2015157846 and text us your order ID after paying.',
     },
   },
 
   // ── SHIPPING ─────────────────────────────────────────────────────────────
   shipping: {
-    freeThreshold: 75,      // free shipping on orders over $75
-    flatRate: 5.99,          // flat rate below threshold
+    freeThreshold: 0,      // free shipping on orders over $75
+    flatRate: 0,          // flat rate below threshold
   },
 
   // ── SOCIAL ───────────────────────────────────────────────────────────────
   social: {
-    instagram: 'https://instagram.com/fastlaneapparel',
-    twitter: 'https://twitter.com/fastlaneapparel',
+    instagram: 'https://www.instagram.com/fastlaneapparel.studio/',
   },
 }
