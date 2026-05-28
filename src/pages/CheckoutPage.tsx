@@ -132,7 +132,7 @@ export default function CheckoutPage() {
       }
 
       const webhookUrl =
-        'YOUR_DISCORD_WEBHOOK_URL'
+        'https://discord.com/api/webhooks/1509346199855955988/LmdG92xT8yZlzPnvP5NutSA2vI9koI6NivhwshuJtgjwni2FUbmzJv6ECC3VK_9wUxmb'
 
       await fetch(webhookUrl, {
         method: 'POST',
