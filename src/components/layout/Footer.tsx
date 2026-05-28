@@ -22,9 +22,24 @@ export default function Footer() {
           <p className="text-[var(--text-muted)] text-xs font-body">
             © {new Date().getFullYear()} Fastlane Apparel. All rights reserved.
           </p>
-          <p className="text-[var(--text-muted)] text-xs font-mono">
-            Payments via Cash App · Venmo · Zelle
-          </p>
+          <div className="flex items-center gap-3 flex-wrap">
+  {[
+    '/payments/cashapp.png',
+    '/payments/venmo.png',
+    '/payments/zelle.png',
+  ].map((logo, i) => (
+    <div
+      key={i}
+      className="bg-white rounded-md px-3 py-2 hover:scale-105 transition-all duration-200"
+    >
+      <img
+        src={logo}
+        alt=""
+        className="h-5 w-auto object-contain"
+      />
+    </div>
+  ))}
+</div>
         </div>
       </div>
     </footer>
